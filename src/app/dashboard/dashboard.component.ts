@@ -1,6 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import * as Chartist from 'chartist';
 import Chart from 'chart.js/auto';
+import {
+  ColDef,
+  FirstDataRenderedEvent,
+  GridReadyEvent,
+  IDetailCellRendererParams,
+} from '@ag-grid-community/core';
+import { HttpClient } from '@angular/common/http';
+
+
+export  class category{
+  id: number;
+  category: string;
+  count: number;
+
+}
+
+const CategoryData: category[]=[
+
+  { id: 1, category: 'Personal',count: 0},
+  { id: 2, category: 'EMI', count: 3 },
+  { id: 3, category: 'Others', count: 2 },
+];
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +30,9 @@ import Chart from 'chart.js/auto';
 })
 export class DashboardComponent implements OnInit {
   public chart: any;
-  constructor() { }
+
+ 
+  constructor(private http: HttpClient) { }
   createChart(){
 
     this.chart = new Chart("MyChart", {
@@ -51,7 +74,19 @@ export class DashboardComponent implements OnInit {
       this.createChart();
       
   }
-     
 
+  cateories = CategoryData;
+  selecteddata: category;
 
+  onselectdata(category: category){
+    this.selecteddata = category;
+  }
+
+  onFirstDataRendered(params: FirstDataRenderedEvent) {
+    // arbitrarily expand a row for presentational purposes
+    setTimeout(function () {
+      params.api.getDisplayedRowAtIndex(1)!.setExpanded(true);
+    }, 0);
+  }
+ 
 }
