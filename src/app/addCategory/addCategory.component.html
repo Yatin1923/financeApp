@@ -1,0 +1,74 @@
+<div class="dialog-content-wrapper">
+
+
+    <div class="card-header card-header-danger" fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+        <h2 class="card-title">Category</h2>  
+        <div fxFlex="60%" fxLayoutAlign="end">
+          <button class="btn btn-danger pull-right" (click)="closeDialog(false)" mat-dialog-close mat-icon-button type="button">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        
+    </div>
+  
+    <div mat-dialog-content  > 
+  
+  
+      <form  *ngIf="!isView" class=" p-0 pb-0 m-0 pt-8 " id="categoryForm" [formGroup]="categoryForm" (ngSubmit)="onSubmit()" autocomplete="off">
+  
+        <div fxLayout="column" fxFlex="100%">
+          <div fxLayout="row" fxFlex="100%" fxLayoutGap="10px">
+  
+            <mat-form-field fxFlex="50%">
+              <input matInput placeholder="Category Name" formControlName="Category">
+              
+            </mat-form-field>
+  
+            <mat-form-field fxFlex="50%">
+              <input matInput placeholder="Count" formControlName="count">
+            
+            </mat-form-field>
+          </div>
+          
+        </div>
+  
+  
+      </form>
+  
+      <div *ngIf="isView" fxFlex="100" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutGap.lt-md="0">
+      
+        <div fxLayout="row" fxFlex="100%" fxLayoutGap="10px">
+      
+          <div class="info-line" fxFlex="50" fxFlex.lt-md="100">
+            <div class="text-title"><b> Category Name</b></div>
+            <!-- <div class="info">{{ categoryDetails?.categoryName || '-'}} </div> -->
+          </div>
+      
+          <div class="info-line" fxFlex="50" fxFlex.lt-md="100">
+            <div class="text-title"><b>  Count</b></div>
+            <!-- <div class="info">{{categoryDetails?.contactNo || '-'}} </div> -->
+          </div>
+      
+        </div>
+  
+        <div fxLayout="row" fxFlex="100%" fxLayoutGap="10px">
+          <div class="info-line" fxFlex="50" fxFlex.lt-md="100">
+            <div class="text-title"><b> Join Date</b></div>
+            <!-- <div class="info">{{categoryDetails?.joiningDate || '-'}} </div> -->
+      
+          </div>
+  
+        </div>
+      
+      </div>
+  
+      <div mat-dialog-actions fxLayoutAlign="end"  *ngIf="!isView">
+  
+        <button mat-button mat-dialog-close class="btn ">Cancel</button>
+  
+        <button  mat-button  type="submit" form="categoryForm" class="btn btn-danger pull-right" [disabled]="disableSubmitButton()">
+         save
+        </button>
+      </div>
+    </div>
+  </div>

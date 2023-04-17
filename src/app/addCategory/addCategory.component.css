@@ -1,0 +1,10 @@
+
+  .mat-dialog-content{
+  
+      overflow: inherit;
+    }
+   
+  .mat-dialog-actions {
+    padding: 20px 0;
+  }
+  

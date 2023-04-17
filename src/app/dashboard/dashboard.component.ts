@@ -7,6 +7,9 @@ import {
   IDetailCellRendererParams,
 } from '@ag-grid-community/core';
 import { HttpClient } from '@angular/common/http';
+import { AddCategoryComponent } from 'app/addCategory/addCategory.component';
+import { MatDialog } from '@angular/material/dialog';
+import { FormGroup } from '@angular/forms';
 
 
 export  class category{
@@ -29,10 +32,16 @@ const CategoryData: category[]=[
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
+  //confirmDialogRef!: MatDialogRef<ConfirmDialogComponent>;
+
+  isLoadingResults = false;
   public chart: any;
 
  
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    public dialog: MatDialog,) { }
   createChart(){
 
     this.chart = new Chart("MyChart", {
@@ -88,5 +97,30 @@ export class DashboardComponent implements OnInit {
       params.api.getDisplayedRowAtIndex(1)!.setExpanded(true);
     }, 0);
   }
+
+  loadAddEditCategory() {
+    let dialogRef = this.dialog.open(AddCategoryComponent, {
+        
+        width: '800px',
+       
+        data: {
+        
+        }
+      });
+
+    dialogRef.afterClosed()
+        .subscribe((response: FormGroup) => {
+          if (!response) {
+            return;
+          }
+          this.reloadData();
+        });
+  }
+
+  reloadData() {
+
+     
+    }
+
  
 }
